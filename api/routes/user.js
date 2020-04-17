@@ -3,7 +3,6 @@ const  db = require("../models");
 const auth = require("../middleware/auth");
 
 router.get('/', auth, async (req, res) => {
-    console.log("not login");
     res.status(200).json({
         _id: req.user._id,
         isAdmin: req.user.role === 0 ? false : true,
@@ -59,11 +58,12 @@ router.post('/login', async (req, res) => {
 });
 
 //logout routes
-router.post('/logout', async (req, res) => {
+router.get('/logout', auth, (req, res) => {
     db.User.findOneAndUpdate({ _id: req.user._id }, { token: "", tokenExp: "" }, (err, doc) => {
         if (err) return res.json({ success: false, err });
         return res.status(200).json({
-            success: true
+            success: true,
+            message: "Successfuly Log You Out"
         });
     });
 });
