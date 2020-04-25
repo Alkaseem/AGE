@@ -1,9 +1,9 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
-import { Menu } from 'antd';
+import { Menu, Icon, Badge } from 'antd';
 import axios from 'axios';
 import { USER_SERVER } from '../../../Config';
-import { withRouter } from 'react-router-dom';
+import { withRouter, NavLink } from 'react-router-dom';
 import { useSelector } from "react-redux";
 
 function RightMenu(props) {
@@ -33,6 +33,17 @@ function RightMenu(props) {
   } else {
     return (
       <Menu mode={props.mode}>
+        <Menu.Item key="upload">
+          <NavLink exact to="/products/upload">Upload</NavLink>
+        </Menu.Item>
+
+        <Menu.Item key="cart">
+          <Badge  count={user.userData && user.userData.cart.length}>
+            <NavLink exact to="/user/cart" style={{ marginRight: -22, color: "#667777" }}>
+              <Icon type="shopping-cart" style={{ fontSize: 30, marginBottom: 4 }} /></NavLink>
+          </Badge>
+        </Menu.Item>
+        
         <Menu.Item key="logout">
           <a onClick={logoutHandler}>Logout</a>
         </Menu.Item>

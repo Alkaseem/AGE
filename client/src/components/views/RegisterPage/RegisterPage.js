@@ -20,6 +20,7 @@ const formItemLayout = {
     sm: { span: 16 },
   },
 };
+
 const tailFormItemLayout = {
   wrapperCol: {
     xs: {
@@ -36,7 +37,6 @@ const tailFormItemLayout = {
 function RegisterPage(props) {
   const dispatch = useDispatch();
   return (
-
     <Formik
       initialValues={{
         email: '',
@@ -77,7 +77,7 @@ function RegisterPage(props) {
             } else {
               alert(response.payload.err.errmsg)
             }
-          })
+          });
 
           setSubmitting(false);
         }, 500);
